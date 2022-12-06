@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Torok_Erika_Lab2.Data;
 
@@ -11,9 +12,10 @@ using Torok_Erika_Lab2.Data;
 namespace Torok_Erika_Lab2.Migrations
 {
     [DbContext(typeof(Torok_Erika_Lab2Context))]
-    partial class Torok_Erika_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20221206123530_UpdateAuthor")]
+    partial class UpdateAuthor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,11 +26,11 @@ namespace Torok_Erika_Lab2.Migrations
 
             modelBuilder.Entity("Torok_Erika_Lab2.Models.Author", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -37,7 +39,7 @@ namespace Torok_Erika_Lab2.Migrations
                     b.Property<int>("LastName")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Author");
                 });
@@ -49,6 +51,10 @@ namespace Torok_Erika_Lab2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("AuthorID")
                         .HasColumnType("int");
@@ -67,8 +73,6 @@ namespace Torok_Erika_Lab2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("AuthorID");
 
                     b.HasIndex("PublisherID");
 
@@ -94,15 +98,9 @@ namespace Torok_Erika_Lab2.Migrations
 
             modelBuilder.Entity("Torok_Erika_Lab2.Models.Book", b =>
                 {
-                    b.HasOne("Torok_Erika_Lab2.Models.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorID");
-
                     b.HasOne("Torok_Erika_Lab2.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherID");
-
-                    b.Navigation("Author");
 
                     b.Navigation("Publisher");
                 });

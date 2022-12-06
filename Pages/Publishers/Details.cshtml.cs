@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Torok_Erika_Lab2.Data;
 using Torok_Erika_Lab2.Models;
 
-namespace Torok_Erika_Lab2.Pages.Books
+namespace Torok_Erika_Lab2.Pages.Publishers
 {
     public class DetailsModel : PageModel
     {
@@ -19,23 +19,23 @@ namespace Torok_Erika_Lab2.Pages.Books
             _context = context;
         }
 
-      public Book Book { get; set; }
+      public Publisher Publisher { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Book == null)
+            if (id == null || _context.Publisher == null)
             {
                 return NotFound();
             }
 
-            var book = await _context.Book.Include(a=>a.Author).FirstOrDefaultAsync(m => m.ID == id);
-            if (book == null)
+            var publisher = await _context.Publisher.FirstOrDefaultAsync(m => m.Id == id);
+            if (publisher == null)
             {
                 return NotFound();
             }
             else 
             {
-                Book = book;
+                Publisher = publisher;
             }
             return Page();
         }

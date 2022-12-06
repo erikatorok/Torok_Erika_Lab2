@@ -12,8 +12,8 @@ using Torok_Erika_Lab2.Data;
 namespace Torok_Erika_Lab2.Migrations
 {
     [DbContext(typeof(Torok_Erika_Lab2Context))]
-    [Migration("20221104144446_PublishingDate")]
-    partial class PublishingDate
+    [Migration("20221206122821_AuthorPublisher")]
+    partial class AuthorPublisher
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,8 +36,14 @@ namespace Torok_Erika_Lab2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("AuthorsID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("Dceimal(6, 2)");
+
+                    b.Property<int?>("PublisherID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("PublishingDate")
                         .HasColumnType("datetime2");
@@ -48,7 +54,40 @@ namespace Torok_Erika_Lab2.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("PublisherID");
+
                     b.ToTable("Book");
+                });
+
+            modelBuilder.Entity("Torok_Erika_Lab2.Models.Publisher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("PublisherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Publisher");
+                });
+
+            modelBuilder.Entity("Torok_Erika_Lab2.Models.Book", b =>
+                {
+                    b.HasOne("Torok_Erika_Lab2.Models.Publisher", "Publisher")
+                        .WithMany("Books")
+                        .HasForeignKey("PublisherID");
+
+                    b.Navigation("Publisher");
+                });
+
+            modelBuilder.Entity("Torok_Erika_Lab2.Models.Publisher", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }
