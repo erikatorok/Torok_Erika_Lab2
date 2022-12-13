@@ -28,7 +28,7 @@ namespace Torok_Erika_Lab2.Pages.Authors
                 return NotFound();
             }
 
-            var author = await _context.Author.FirstOrDefaultAsync(m => m.Id
+            var author = await _context.Author.FirstOrDefaultAsync(m => m.ID
             == id);
             if (author == null)
             {

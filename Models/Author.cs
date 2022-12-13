@@ -2,18 +2,21 @@
 {
     public class Author
     {
-        public int Id { get; set; }
-        
-        public string FirstName { get; set; }
+            public int ID { get; set; }
 
-        public int LastName { get; set; }
+            public string FirstName { get; set; }
 
-        public string FullName
-        {
-            get
+            public int LastName { get; set; }
+
+            public string FullName
             {
-                return FirstName + " " + LastName;
+                get
+                {
+                    return FirstName + " " + LastName;
+                }
             }
-        }
+
+            public ICollection<Book>? Books { get; set; } //navigation property
+        
     }
 }

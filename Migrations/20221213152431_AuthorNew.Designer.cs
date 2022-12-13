@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Torok_Erika_Lab2.Data;
 
@@ -11,9 +12,10 @@ using Torok_Erika_Lab2.Data;
 namespace Torok_Erika_Lab2.Migrations
 {
     [DbContext(typeof(Torok_Erika_Lab2Context))]
-    partial class Torok_Erika_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20221213152431_AuthorNew")]
+    partial class AuthorNew
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /*protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,5 +120,6 @@ namespace Torok_Erika_Lab2.Migrations
                 });
 #pragma warning restore 612, 618
         }
+    }*/
     }
 }
